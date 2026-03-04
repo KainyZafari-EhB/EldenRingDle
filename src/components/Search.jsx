@@ -11,7 +11,7 @@ export default function Search({ onGuess, guessedIds }) {
     const availableChars = characters.filter(c => !guessedIds.includes(c.id));
 
     const filtered = availableChars.filter(c =>
-        c.name.toLowerCase().includes(query.toLowerCase())
+        c.name.toLowerCase().startsWith(query.toLowerCase())
     );
 
     const handleSelect = (char) => {

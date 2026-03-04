@@ -37,8 +37,10 @@ export default function SplashMode({ onWin }) {
 
         const won = char.id === targetChar?.id;
         if (won) {
-            setHasCompletedToday(true);
-            onWin();
+            setTimeout(() => {
+                setHasCompletedToday(true);
+                onWin();
+            }, 1500);
         }
 
         const dataToSave = {
@@ -101,7 +103,7 @@ export default function SplashMode({ onWin }) {
                 </p>
             </div>
 
-            {!isWin ? (
+            {!hasCompletedToday ? (
                 <div className="w-full flex flex-col items-center">
                     {!hasCompletedToday && (
                         <Search onGuess={handleGuess} guessedIds={guesses.map(g => g.id)} />

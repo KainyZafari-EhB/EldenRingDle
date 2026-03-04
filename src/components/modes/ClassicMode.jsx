@@ -38,8 +38,12 @@ export default function ClassicMode({ onWin }) {
 
         const won = char.id === target?.id;
         if (won) {
-            setHasCompletedToday(true);
-            onWin();
+            // Delay the win screen and completion state to allow animations to finish
+            // 7 categories * 500ms = 3500ms
+            setTimeout(() => {
+                setHasCompletedToday(true);
+                onWin();
+            }, 3500);
         }
 
         // Save progress for the day
@@ -59,7 +63,7 @@ export default function ClassicMode({ onWin }) {
                 Guess the Character
             </p>
 
-            {!isWin ? (
+            {!hasCompletedToday ? (
                 <div className="w-full flex flex-col items-center">
                     <div className="flex gap-4 w-full justify-center max-w-md">
                         {/* Hint 1 Logic */}
@@ -88,7 +92,7 @@ export default function ClassicMode({ onWin }) {
                     )}
                 </div>
             ) : (
-                <div className="flex flex-col items-center gap-6 mb-8 w-full">
+                <div className="flex flex-col items-center gap-6 mb-8 w-full animate-fade-in">
                     <div className="text-xl md:text-2xl text-center font-bold text-elden-green px-10 py-5 border-2 border-elden-green rounded-xl bg-gradient-to-r from-[#14532d]/80 to-[#166534]/80 shadow-[0_0_40px_rgba(74,222,128,0.3)] animate-pulse backdrop-blur-sm">
                         Victory! <br /> The target was <span className="text-elden-gold mx-2 text-3xl block mt-2 drop-shadow-md">{target.name}</span>
                     </div>

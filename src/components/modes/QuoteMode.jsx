@@ -39,8 +39,10 @@ export default function QuoteMode({ onWin }) {
 
         const won = char.id === targetChar?.id;
         if (won) {
-            setHasCompletedToday(true);
-            onWin();
+            setTimeout(() => {
+                setHasCompletedToday(true);
+                onWin();
+            }, 1000);
         }
 
         const dataToSave = {
@@ -86,7 +88,7 @@ export default function QuoteMode({ onWin }) {
                 </p>
             </div>
 
-            {!isWin ? (
+            {!hasCompletedToday ? (
                 <div className="w-full flex flex-col items-center">
                     {!hasCompletedToday && (
                         <>
