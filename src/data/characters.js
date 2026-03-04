@@ -45,7 +45,7 @@ export const characters = [
         combatStyle: "Melee",
         affiliation: "Carian",
         release: "Base Game",
-        image: "/blaidd.png"
+        image: "/images/blaidd.png"
     },
     {
         id: 5,
