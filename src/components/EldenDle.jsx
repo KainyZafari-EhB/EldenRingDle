@@ -56,7 +56,7 @@ export default function EldenDle() {
     const allCompleted = Object.values(dailyCompletion).every(val => val !== null);
 
     return (
-        <div className="min-h-screen w-full flex flex-col items-center bg-elden-black bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#2a2a2a] via-[#111] to-[#0a0a0a] p-4 md:p-8 font-sans relative">
+        <div className="min-h-screen w-full flex flex-col items-center p-4 md:p-8 font-sans relative">
 
             {/* Top Bar for Stats if completed */}
             {allCompleted && (
