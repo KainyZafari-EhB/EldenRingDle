@@ -1,0 +1,22 @@
+export const quotes = [
+    { id: 1, characterId: 1, text: "I am [...], Blade of Miquella. And I have never known defeat." },
+    { id: 2, characterId: 2, text: "Put these foolish ambitions to rest." },
+    { id: 3, characterId: 2, text: "Foul tarnished, in search of the Elden Ring. Emboldened by the flame of ambition." },
+    { id: 4, characterId: 3, text: "I stole a fragment of the Rune of Death, and used it to forge the godslaying black knives through fearsome rite." },
+    { id: 5, characterId: 4, text: "What a sick way to fight, eh? The glory of the clash is shared, by Radahn and you." },
+    { id: 6, characterId: 8, text: "I command thee, kneel! I am the lord of all that is golden!" },
+    { id: 7, characterId: 8, text: "Bear witness!" },
+    { id: 8, characterId: 9, text: "I offer you an accord." },
+    { id: 9, characterId: 10, text: "Ah, I knew you'd come. To stand before the Elden Ring. To become Elden Lord. What a sad state of affairs." },
+    { id: 10, characterId: 11, text: "Have it writ upon thy meagre grave: Felled by King [...]! Last of all kings." },
+    { id: 11, characterId: 12, text: "Tres! Duo! Unus! Nihil! Nihil! Nihil!" },
+    { id: 12, characterId: 12, text: "Welcome, honored guest. To the birthplace of our dynasty!" },
+    { id: 13, characterId: 13, text: "Join the Serpent King, as family... Together, we will devour the very gods!" },
+    { id: 14, characterId: 14, text: "Sweeting, here is thy rebirth. Now, thy life is mine." },
+    { id: 15, characterId: 17, text: "O, Death. Become my blade once more." },
+    { id: 16, characterId: 18, text: "I have given thee courtesy enough. Now I fight as [...]! Warrior!" },
+    { id: 17, characterId: 6, text: "Those stripped of the Grace of Gold shall all meet death. In the embrace of [...]'s flame." },
+    { id: 18, characterId: 25, text: "My loyal blade. And champion of the festival. Both your deeds will ever be praised in song. Now, the vow will be honored, and my Lord brother's soul will return." },
+    { id: 19, characterId: 25, text: "I yield to none. I am [...] of the Haligtree." },
+    { id: 20, characterId: 27, text: "The depths of your foolishness!" }
+];
