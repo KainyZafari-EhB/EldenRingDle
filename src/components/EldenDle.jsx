@@ -78,10 +78,83 @@ export default function EldenDle() {
             </div>
 
             {/* Navigation Menu */}
-            <Navigation currentMode={currentMode} setMode={setCurrentMode} />
+            {currentMode !== 'home' && (
+                <Navigation currentMode={currentMode} setMode={setCurrentMode} />
+            )}
 
             {/* Active Mode */}
             <div className="w-full flex-grow flex flex-col items-center">
+                {currentMode === 'home' && (
+                    <div className="flex flex-col items-center w-full max-w-lg mt-8 animate-fade-in px-4">
+                        <h2 className="text-xl md:text-2xl text-elden-gold font-bold uppercase tracking-widest mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] text-center">
+                            Select Your Trial
+                        </h2>
+
+                        <div className="flex flex-col gap-3 w-full">
+
+                            {/* Classic Mode Card */}
+                            <div
+                                onClick={() => setCurrentMode('classic')}
+                                className="bg-[#111]/80 backdrop-blur-sm border-2 border-elden-gold/40 hover:border-elden-gold rounded-xl p-3 md:p-4 cursor-pointer transform hover:-translate-y-1 transition-all duration-300 shadow-[0_0_15px_rgba(198,162,91,0.1)] hover:shadow-[0_0_20px_rgba(198,162,91,0.3)] group flex items-center justify-between text-left gap-4 relative overflow-hidden"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-elden-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="flex items-center gap-4 z-10 w-full overflow-hidden">
+                                    <span className="text-3xl min-w-[3rem] text-center drop-shadow-md group-hover:scale-110 transition-transform duration-300">👤</span>
+                                    <div className="flex flex-col min-w-0 flex-grow pr-2">
+                                        <h3 className="text-lg md:text-xl text-white font-bold tracking-widest uppercase mb-0.5 whitespace-nowrap overflow-hidden text-ellipsis">Classic</h3>
+                                        <p className="text-gray-400 text-[10px] md:text-xs uppercase tracking-wider whitespace-nowrap overflow-hidden text-ellipsis">Guess the character from their attributes</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Quote Mode Card */}
+                            <div
+                                onClick={() => setCurrentMode('quote')}
+                                className="bg-[#111]/80 backdrop-blur-sm border-2 border-elden-gold/40 hover:border-elden-gold rounded-xl p-3 md:p-4 cursor-pointer transform hover:-translate-y-1 transition-all duration-300 shadow-[0_0_15px_rgba(198,162,91,0.1)] hover:shadow-[0_0_20px_rgba(198,162,91,0.3)] group flex items-center justify-between text-left gap-4 relative overflow-hidden"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-elden-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="flex items-center gap-4 z-10 w-full overflow-hidden">
+                                    <span className="text-3xl min-w-[3rem] text-center drop-shadow-md group-hover:scale-110 transition-transform duration-300">💬</span>
+                                    <div className="flex flex-col min-w-0 flex-grow pr-2">
+                                        <h3 className="text-lg md:text-xl text-white font-bold tracking-widest uppercase mb-0.5 whitespace-nowrap overflow-hidden text-ellipsis">Quote</h3>
+                                        <p className="text-gray-400 text-[10px] md:text-xs uppercase tracking-wider whitespace-nowrap overflow-hidden text-ellipsis">Guess the character from a voice line</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Ability Mode Card */}
+                            <div
+                                onClick={() => setCurrentMode('ability')}
+                                className="bg-[#111]/80 backdrop-blur-sm border-2 border-elden-gold/40 hover:border-elden-gold rounded-xl p-3 md:p-4 cursor-pointer transform hover:-translate-y-1 transition-all duration-300 shadow-[0_0_15px_rgba(198,162,91,0.1)] hover:shadow-[0_0_20px_rgba(198,162,91,0.3)] group flex items-center justify-between text-left gap-4 relative overflow-hidden"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-elden-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="flex items-center gap-4 z-10 w-full overflow-hidden">
+                                    <span className="text-3xl min-w-[3rem] text-center drop-shadow-md group-hover:scale-110 transition-transform duration-300">✨</span>
+                                    <div className="flex flex-col min-w-0 flex-grow pr-2">
+                                        <h3 className="text-lg md:text-xl text-white font-bold tracking-widest uppercase mb-0.5 whitespace-nowrap overflow-hidden text-ellipsis">Ability</h3>
+                                        <p className="text-gray-400 text-[10px] md:text-xs uppercase tracking-wider whitespace-nowrap overflow-hidden text-ellipsis">Guess the character from their spell/skill</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Splash Mode Card */}
+                            <div
+                                onClick={() => setCurrentMode('splash')}
+                                className="bg-[#111]/80 backdrop-blur-sm border-2 border-elden-gold/40 hover:border-elden-gold rounded-xl p-3 md:p-4 cursor-pointer transform hover:-translate-y-1 transition-all duration-300 shadow-[0_0_15px_rgba(198,162,91,0.1)] hover:shadow-[0_0_20px_rgba(198,162,91,0.3)] group flex items-center justify-between text-left gap-4 relative overflow-hidden"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-elden-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="flex items-center gap-4 z-10 w-full overflow-hidden">
+                                    <span className="text-3xl min-w-[3rem] text-center drop-shadow-md group-hover:scale-110 transition-transform duration-300">🖼️</span>
+                                    <div className="flex flex-col min-w-0 flex-grow pr-2">
+                                        <h3 className="text-lg md:text-xl text-white font-bold tracking-widest uppercase mb-0.5 whitespace-nowrap overflow-hidden text-ellipsis">Splash</h3>
+                                        <p className="text-gray-400 text-[10px] md:text-xs uppercase tracking-wider whitespace-nowrap overflow-hidden text-ellipsis">Guess from a zoomed-in image</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {currentMode === 'classic' && <ClassicMode onWin={handleWin} />}
                 {currentMode === 'quote' && <QuoteMode onWin={handleWin} />}
                 {currentMode === 'ability' && <AbilityMode onWin={handleWin} />}
