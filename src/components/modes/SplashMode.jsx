@@ -73,7 +73,7 @@ export default function SplashMode({ onWin }) {
                             className="w-full h-full absolute inset-0 bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
                             style={{
                                 backgroundImage: `url(${targetChar.image})`,
-                                backgroundSize: `${zoomLevel}%`,
+                                backgroundSize: isWin ? 'cover' : `${zoomLevel}%`,
                                 filter: isWin ? 'none' : `blur(${blurLevel}px)`
                             }}
                         />

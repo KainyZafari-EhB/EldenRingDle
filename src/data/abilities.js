@@ -8,10 +8,10 @@ export const abilities = [
     { id: 4, characterId: 5, name: "Collapsing Stars", type: "Skill" },
 
     // Messmer (id: 6)
-    { id: 5, characterId: 6, name: "[...]'s Orb", type: "Incantation" },
+    { id: 5, characterId: 6, name: "M_____'s Orb", type: "Incantation" },
 
     // Ranni (id: 3)
-    { id: 6, characterId: 3, name: "[...]'s Dark Moon", type: "Sorcery" },
+    { id: 6, characterId: 3, name: "R____'s Dark Moon", type: "Sorcery" },
 
     // Mohg (id: 12)
     { id: 7, characterId: 12, name: "Bloodboon Ritual", type: "Skill" },
@@ -30,10 +30,10 @@ export const abilities = [
 
     // Rennala (id: 14)
     { id: 14, characterId: 14, name: "Comet Azur", type: "Sorcery" },
-    { id: 15, characterId: 14, name: "[...]'s Full Moon", type: "Sorcery" },
+    { id: 15, characterId: 14, name: "R______'s Full Moon", type: "Sorcery" },
 
     // Placidusax (id: 21)
-    { id: 16, characterId: 21, name: "[...]'s Ruin", type: "Incantation" },
+    { id: 16, characterId: 21, name: "P_________'s Ruin", type: "Incantation" },
 
     // Godrick (id: 8)
     { id: 17, characterId: 8, name: "I Command Thee, Kneel!", type: "Skill" },
@@ -42,29 +42,29 @@ export const abilities = [
     { id: 18, characterId: 11, name: "Cursed-Blood Slash", type: "Skill" },
 
     // Godfrey (id: 18)
-    { id: 19, characterId: 18, name: "[...]'s Earthshaker", type: "Skill" },
+    { id: 19, characterId: 18, name: "H_____ L___'s Earthshaker", type: "Skill" },
 
     // Elden Beast (id: 16)
     { id: 20, characterId: 16, name: "Elden Stars", type: "Incantation" },
 
     // Fortissax (id: 22)
-    { id: 21, characterId: 22, name: "[...]'s Lightning Spear", type: "Incantation" },
+    { id: 21, characterId: 22, name: "F________'s Lightning Spear", type: "Incantation" },
     { id: 22, characterId: 22, name: "Death Lightning", type: "Incantation" },
 
     // Rellana (id: 7)
-    { id: 23, characterId: 7, name: "[...]'s Twin Moons", type: "Sorcery" },
+    { id: 23, characterId: 7, name: "R______'s Twin Moons", type: "Sorcery" },
 
     // Midra (id: 27)
-    { id: 24, characterId: 27, name: "[...]'s Flame of Frenzy", type: "Incantation" },
+    { id: 24, characterId: 27, name: "M____'s Flame of Frenzy", type: "Incantation" },
 
     // Bayle (id: 28)
-    { id: 25, characterId: 28, name: "[...]'s Tyranny", type: "Incantation" },
+    { id: 25, characterId: 28, name: "B____'s Tyranny", type: "Incantation" },
 
     // Romina (id: 29)
     { id: 26, characterId: 29, name: "Butterflies of Rot", type: "Skill" },
 
     // Promised Consort Radahn (id: 26)
-    { id: 27, characterId: 26, name: "Light of [...]", type: "Incantation" },
+    { id: 27, characterId: 26, name: "Light of M_______", type: "Incantation" },
 
     // Astel (id: 23)
     { id: 28, characterId: 23, name: "Naturalborn Meteorite", type: "Sorcery" },
