@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { characters } from '../../data/characters';
 import { quotes } from '../../data/quotes';
 import { getEldenDleDayIndex, getDailyTargetIndex } from '../../hooks/useDaily';
 import Search from '../Search';
 import SimpleGuessRow from '../SimpleGuessRow';
+import VictoryCard from '../VictoryCard';
 
 export default function QuoteMode({ onWin }) {
     const [targetQuote, setTargetQuote] = useState(null);
@@ -11,8 +12,6 @@ export default function QuoteMode({ onWin }) {
     const [guesses, setGuesses] = useState([]);
     const [hasCompletedToday, setHasCompletedToday] = useState(false);
     const [dayIndex, setDayIndex] = useState('');
-    const audioRef = useRef(null);
-    const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
         const currentDayIndex = getEldenDleDayIndex();
@@ -52,28 +51,13 @@ export default function QuoteMode({ onWin }) {
         localStorage.setItem(`eldenDle_quote_${dayIndex}`, JSON.stringify(dataToSave));
     };
 
-    const toggleAudio = () => {
-        if (!audioRef.current) return;
-
-        if (isPlaying) {
-            audioRef.current.pause();
-            audioRef.current.currentTime = 0;
-            setIsPlaying(false);
-        } else {
-            audioRef.current.play().catch(err => {
-                console.error("Audio file not found. Please ensure you have public/audio/quote_ID.mp3 files.", err);
-                alert("Audio file missing! Please place 'quote_" + targetQuote.id + ".mp3' in the public/audio folder.");
-            });
-            setIsPlaying(true);
-        }
-    };
-
     if (!targetQuote || !targetChar) return <div className="text-elden-gold">Summoning...</div>;
     const isWin = guesses.length > 0 && guesses[0].id === targetChar.id;
 
-    const hintsRequired = 3;
-    const guessesRemainingForHint = Math.max(0, hintsRequired - guesses.length);
-    const isHintUnlocked = guesses.length >= hintsRequired;
+    // Progressive hint thresholds
+    const hint1Threshold = 2;  // Region hint after 2 wrong guesses
+    const hint2Threshold = 4;  // Species hint after 4 wrong guesses
+    const hint3Threshold = 6;  // Affiliation hint after 6 wrong guesses
 
     return (
         <div className="w-full max-w-[1200px] flex flex-col items-center">
@@ -81,64 +65,56 @@ export default function QuoteMode({ onWin }) {
                 Guess from the Quote
             </p>
 
-            <div className="bg-[#1a1a1a] border-l-4 border-elden-gold p-6 md:p-10 mb-8 rounded shadow-[0_0_20px_rgba(198,162,91,0.1)] w-full max-w-2xl relative">
+            <div className="bg-[#1a1a1a] border-l-4 border-elden-gold p-6 md:p-10 mb-6 rounded shadow-[0_0_20px_rgba(198,162,91,0.1)] w-full max-w-2xl relative">
                 <span className="text-6xl text-elden-gold/20 absolute top-2 left-4 font-serif">"</span>
                 <p className="text-xl md:text-3xl text-gray-200 text-center font-serif italic tracking-wide relative z-10 leading-relaxed">
                     {targetQuote.text}
                 </p>
             </div>
 
+            {/* Progressive Hints */}
+            {!hasCompletedToday && !isWin && (
+                <div className="flex flex-wrap gap-3 justify-center mb-6 w-full max-w-md">
+                    {/* Hint 1: Region */}
+                    <div className="bg-[#151515] border border-white/10 px-4 py-2.5 rounded-lg flex flex-col items-center flex-1 min-w-[120px]">
+                        <span className="text-gray-500 text-[10px] uppercase tracking-widest font-semibold mb-1">Region</span>
+                        {guesses.length >= hint1Threshold ? (
+                            <span className="text-elden-gold font-bold text-sm animate-[fadeIn_0.5s_ease-out]">{targetChar.region}</span>
+                        ) : (
+                            <span className="text-gray-600 text-[10px] font-bold">{hint1Threshold - guesses.length} guess{hint1Threshold - guesses.length !== 1 ? 'es' : ''}</span>
+                        )}
+                    </div>
+
+                    {/* Hint 2: Species */}
+                    <div className="bg-[#151515] border border-white/10 px-4 py-2.5 rounded-lg flex flex-col items-center flex-1 min-w-[120px]">
+                        <span className="text-gray-500 text-[10px] uppercase tracking-widest font-semibold mb-1">Species</span>
+                        {guesses.length >= hint2Threshold ? (
+                            <span className="text-elden-gold font-bold text-sm animate-[fadeIn_0.5s_ease-out]">{targetChar.species}</span>
+                        ) : (
+                            <span className="text-gray-600 text-[10px] font-bold">{hint2Threshold - guesses.length} guess{hint2Threshold - guesses.length !== 1 ? 'es' : ''}</span>
+                        )}
+                    </div>
+
+                    {/* Hint 3: Affiliation */}
+                    <div className="bg-[#151515] border border-white/10 px-4 py-2.5 rounded-lg flex flex-col items-center flex-1 min-w-[120px]">
+                        <span className="text-gray-500 text-[10px] uppercase tracking-widest font-semibold mb-1">Affiliation</span>
+                        {guesses.length >= hint3Threshold ? (
+                            <span className="text-elden-gold font-bold text-sm animate-[fadeIn_0.5s_ease-out]">{targetChar.affiliation}</span>
+                        ) : (
+                            <span className="text-gray-600 text-[10px] font-bold">{hint3Threshold - guesses.length} guess{hint3Threshold - guesses.length !== 1 ? 'es' : ''}</span>
+                        )}
+                    </div>
+                </div>
+            )}
+
             {!hasCompletedToday ? (
                 <div className="w-full flex flex-col items-center">
                     {!hasCompletedToday && (
-                        <>
-                            <Search onGuess={handleGuess} guessedIds={guesses.map(g => g.id)} />
-
-                            {/* Audio Hint Section */}
-                            <div className="mt-8 flex flex-col items-center bg-[#1a1a1a]/50 px-8 py-4 rounded-xl border border-white/5">
-                                {!isHintUnlocked && !isWin && (
-                                    <div className="text-gray-500 text-sm font-medium tracking-widest uppercase flex items-center gap-2">
-                                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg>
-                                        Audio Hint in <span className="text-elden-gold font-bold">{guessesRemainingForHint}</span> {guessesRemainingForHint === 1 ? 'guess' : 'guesses'}
-                                    </div>
-                                )}
-
-                                {isHintUnlocked && !isWin && (
-                                    <div className="flex flex-col items-center animate-fade-in">
-                                        <p className="text-elden-gold text-sm font-bold tracking-widest uppercase mb-3 flex items-center gap-2">
-                                            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><path d="M15.54 8.46a5 5 0 010 7.07" /><path d="M19.07 4.93a10 10 0 010 14.14" /></svg> Voice Line Unlocked!
-                                        </p>
-                                        <button
-                                            onClick={toggleAudio}
-                                            className="flex items-center gap-2 px-6 py-2 bg-[#111] border border-elden-gold text-elden-gold rounded-full hover:bg-elden-gold hover:text-elden-black transition-colors shadow-[0_0_15px_rgba(198,162,91,0.2)] font-bold uppercase tracking-widest text-sm"
-                                        >
-                                            <span className="text-lg">{isPlaying ? (<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="10" y1="4" x2="10" y2="20" /><line x1="14" y1="4" x2="14" y2="20" /></svg>) : (<svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3" /></svg>)}</span>
-                                            {isPlaying ? 'Playing...' : 'Play Audio'}
-                                        </button>
-                                        <audio
-                                            ref={audioRef}
-                                            src={`/audio/quote_${targetQuote.id}.mp3`}
-                                            onEnded={() => setIsPlaying(false)}
-                                        />
-                                        <p className="text-[10px] text-gray-500 mt-3 text-center max-w-[200px]">
-                                            Requires 'quote_{targetQuote.id}.mp3' in public/audio/
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
-                        </>
+                        <Search onGuess={handleGuess} guessedIds={guesses.map(g => g.id)} />
                     )}
                 </div>
             ) : (
-                <div className="flex flex-col items-center gap-6 mb-8 w-full">
-                    <div className="text-xl md:text-2xl text-center font-bold text-elden-green px-10 py-5 border-2 border-elden-green rounded-xl bg-gradient-to-r from-[#14532d]/80 to-[#166534]/80 shadow-[0_0_40px_rgba(74,222,128,0.3)] animate-pulse backdrop-blur-sm">
-                        Victory! <br /> The speaker was <span className="text-elden-gold mx-2 text-3xl block mt-2 drop-shadow-md">{targetChar.name}</span>
-                    </div>
-                    <div className="text-center text-gray-400 font-bold uppercase tracking-widest text-sm bg-black/50 p-4 rounded-lg border border-white/10">
-                        <p>Great job! Return tomorrow (at 23:00) for a new challenge.</p>
-                        <p className="text-elden-gold mt-2">Try the other modes above!</p>
-                    </div>
-                </div>
+                <VictoryCard characterName={targetChar.name} characterImage={targetChar.image} />
             )}
 
             <div className="w-full flex flex-col gap-3">

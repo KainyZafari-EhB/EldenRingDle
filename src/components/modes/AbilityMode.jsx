@@ -4,6 +4,7 @@ import { abilities } from '../../data/abilities';
 import { getEldenDleDayIndex, getDailyTargetIndex } from '../../hooks/useDaily';
 import Search from '../Search';
 import SimpleGuessRow from '../SimpleGuessRow';
+import VictoryCard from '../VictoryCard';
 
 export default function AbilityMode({ onWin }) {
     const [targetAbility, setTargetAbility] = useState(null);
@@ -95,15 +96,7 @@ export default function AbilityMode({ onWin }) {
                     )}
                 </div>
             ) : (
-                <div className="flex flex-col items-center gap-6 mb-8 w-full">
-                    <div className="text-xl md:text-2xl text-center font-bold text-elden-green px-10 py-5 border-2 border-elden-green rounded-xl bg-gradient-to-r from-[#14532d]/80 to-[#166534]/80 shadow-[0_0_40px_rgba(74,222,128,0.3)] animate-pulse backdrop-blur-sm">
-                        Victory! <br /> The user was <span className="text-elden-gold mx-2 text-3xl block mt-2 drop-shadow-md">{targetChar.name}</span>
-                    </div>
-                    <div className="text-center text-gray-400 font-bold uppercase tracking-widest text-sm bg-black/50 p-4 rounded-lg border border-white/10">
-                        <p>Great job! Return tomorrow (at 23:00) for a new challenge.</p>
-                        <p className="text-elden-gold mt-2">Try the other modes above!</p>
-                    </div>
-                </div>
+                <VictoryCard characterName={targetChar.name} characterImage={targetChar.image} />
             )}
 
             <div className="w-full flex flex-col gap-3">
