@@ -53,22 +53,38 @@ export default function AbilityMode({ onWin }) {
     if (!targetAbility || !targetChar) return <div className="text-elden-gold">Summoning...</div>;
     const isWin = guesses.length > 0 && guesses[0].id === targetChar.id;
 
+    // Simple accent color based on type
+    const typeColors = {
+        Skill: { accent: 'border-amber-600/40', text: 'text-amber-400', bg: 'bg-amber-500/5' },
+        Sorcery: { accent: 'border-cyan-500/40', text: 'text-cyan-400', bg: 'bg-cyan-500/5' },
+        Incantation: { accent: 'border-orange-500/40', text: 'text-orange-400', bg: 'bg-orange-500/5' },
+    };
+    const colors = typeColors[targetAbility.type] || typeColors.Skill;
+
     return (
         <div className="w-full max-w-[1200px] flex flex-col items-center">
             <p className="text-gray-300 mb-6 font-medium tracking-widest uppercase text-sm md:text-base opacity-80 border-b border-elden-gold/30 pb-2">
                 Guess from the Ability/Spell
             </p>
 
-            <div className="flex flex-col items-center mb-8 bg-[#151515] border border-white/10 p-6 rounded-2xl shadow-xl w-full max-w-sm">
-                <div className={`w-32 h-32 md:w-40 md:h-40 ${targetAbility.placeholderColor} rounded-xl border-4 border-elden-gold/70 shadow-[0_0_30px_rgba(198,162,91,0.2)] flex items-center justify-center relative overflow-hidden`}>
-                    <span className="text-white/80 font-bold uppercase tracking-widest text-xs rotate-[-45deg] opacity-30 select-none">Placeholder Image</span>
-                </div>
-                {/* Reveal name of ability after they guess a few times, or immediately if we want? Let's reveal ability name instantly for now */}
-                <h3 className="mt-6 text-xl md:text-2xl font-bold text-elden-gold text-center tracking-widest uppercase">
+            {/* Ability card — clean, minimal design */}
+            <div className={`flex flex-col items-center mb-8 ${colors.bg} border ${colors.accent} p-6 md:p-8 rounded-2xl w-full max-w-sm`}>
+                {/* Type label */}
+                <span className={`text-[10px] md:text-xs ${colors.text} uppercase tracking-[0.25em] font-semibold mb-4 opacity-70`}>
+                    {targetAbility.type}
+                </span>
+
+                {/* Ability name */}
+                <h3 className="text-xl md:text-2xl font-bold text-elden-gold text-center tracking-widest uppercase" style={{ fontFamily: "'Cinzel', serif" }}>
                     {targetAbility.name}
                 </h3>
-                <p className="text-gray-500 text-sm tracking-widest uppercase mt-1">
-                    {targetAbility.type}
+
+                {/* Thin divider */}
+                <div className="w-12 h-[1px] bg-elden-gold/30 mt-4 mb-3"></div>
+
+                {/* Hint text */}
+                <p className="text-gray-500 text-xs tracking-widest uppercase">
+                    Who uses this {targetAbility.type.toLowerCase()}?
                 </p>
             </div>
 

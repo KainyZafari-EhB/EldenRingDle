@@ -51,18 +51,7 @@ export default function Navigation({ currentMode, setMode }) {
     ];
 
     return (
-        <div className="flex justify-center items-center gap-1.5 md:gap-6 mb-6 md:mb-8 mt-2 w-full max-w-[650px] border-b border-elden-gold/20 pb-4 px-2">
-            {/* Back to menu button */}
-            <button
-                onClick={() => setMode('home')}
-                className="flex items-center justify-center p-2 w-10 h-10 md:w-12 md:h-12 rounded-lg transition-all duration-300 bg-[#1e1e1e] text-gray-400 border border-white/10 hover:border-elden-gold/50 hover:text-elden-gold mr-1 md:mr-2 flex-shrink-0"
-                title="Back to menu"
-            >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="15 18 9 12 15 6" />
-                </svg>
-            </button>
-
+        <div className="flex justify-center items-center gap-1.5 md:gap-6 mb-6 md:mb-8 mt-2 w-full max-w-[600px] border-b border-elden-gold/20 pb-4 px-2">
             {modes.map(mode => {
                 const Icon = modeIcons[mode.id];
                 return (
