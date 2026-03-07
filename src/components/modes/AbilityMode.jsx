@@ -89,6 +89,28 @@ export default function AbilityMode({ onWin }) {
                 </p>
             </div>
 
+            {/* Progressive Hints */}
+            {!hasCompletedToday && !isWin && (
+                <div className="flex flex-wrap gap-3 justify-center mb-6 w-full max-w-sm">
+                    <div className="bg-[#151515] border border-white/10 px-4 py-2.5 rounded-lg flex flex-col items-center flex-1 min-w-[120px]">
+                        <span className="text-gray-500 text-[10px] uppercase tracking-widest font-semibold mb-1">Region</span>
+                        {guesses.length >= 2 ? (
+                            <span className="text-elden-gold font-bold text-sm">{targetChar.region}</span>
+                        ) : (
+                            <span className="text-gray-600 text-[10px] font-bold">{2 - guesses.length} guess{2 - guesses.length !== 1 ? 'es' : ''}</span>
+                        )}
+                    </div>
+                    <div className="bg-[#151515] border border-white/10 px-4 py-2.5 rounded-lg flex flex-col items-center flex-1 min-w-[120px]">
+                        <span className="text-gray-500 text-[10px] uppercase tracking-widest font-semibold mb-1">Species</span>
+                        {guesses.length >= 4 ? (
+                            <span className="text-elden-gold font-bold text-sm">{targetChar.species}</span>
+                        ) : (
+                            <span className="text-gray-600 text-[10px] font-bold">{4 - guesses.length} guess{4 - guesses.length !== 1 ? 'es' : ''}</span>
+                        )}
+                    </div>
+                </div>
+            )}
+
             {!hasCompletedToday ? (
                 <div className="w-full flex flex-col items-center">
                     {!hasCompletedToday && (
