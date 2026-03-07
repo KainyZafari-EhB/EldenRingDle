@@ -16,7 +16,7 @@ export const quotes = [
     { id: 15, characterId: 17, text: "O, Death. Become my blade once more." },
     { id: 16, characterId: 18, text: "I have given thee courtesy enough. Now I fight as [...]! Warrior!" },
     { id: 17, characterId: 6, text: "Those stripped of the Grace of Gold shall all meet death. In the embrace of [...]'s flame." },
-    { id: 18, characterId: 25, text: "My loyal blade. And champion of the festival. Both your deeds will ever be praised in song. Now, the vow will be honored, and my Lord brother's soul will return." },
+    { id: 18, characterId: 1, text: "My loyal blade. And champion of the festival. Both your deeds will ever be praised in song. Now, the vow will be honored, and my Lord brother's soul will return." },
     { id: 19, characterId: 25, text: "I yield to none. I am [...] of the Haligtree." },
     { id: 20, characterId: 27, text: "The depths of your foolishness!" }
 ];

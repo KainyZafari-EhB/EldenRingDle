@@ -105,15 +105,15 @@ export default function ClassicMode({ onWin }) {
 
             <div className="w-full flex flex-col gap-3">
                 {guesses.length > 0 && (
-                    <div className="flex gap-2 w-full text-center text-[9px] md:text-xs uppercase tracking-widest text-[#a1a1aa] font-bold mb-2 pb-2 border-b border-white/5">
-                        <div className="w-16 md:w-20 flex-shrink-0">Character</div>
-                        <div className="w-24 md:w-32 flex-shrink-0">Gender</div>
-                        <div className="w-24 md:w-32 flex-shrink-0">Species</div>
-                        <div className="w-24 md:w-32 flex-shrink-0">Weapon</div>
-                        <div className="w-24 md:w-32 flex-shrink-0">Region</div>
-                        <div className="w-24 md:w-32 flex-shrink-0">Combat</div>
-                        <div className="w-24 md:w-32 flex-shrink-0">Affiliation</div>
-                        <div className="w-24 md:w-32 flex-shrink-0">Release</div>
+                    <div className="hidden md:flex gap-2 w-full text-center text-xs uppercase tracking-widest text-[#a1a1aa] font-bold mb-2 pb-2 border-b border-white/5">
+                        <div className="w-20 flex-shrink-0">Character</div>
+                        <div className="w-32 flex-shrink-0">Gender</div>
+                        <div className="w-32 flex-shrink-0">Species</div>
+                        <div className="w-32 flex-shrink-0">Weapon</div>
+                        <div className="w-32 flex-shrink-0">Region</div>
+                        <div className="w-32 flex-shrink-0">Combat</div>
+                        <div className="w-32 flex-shrink-0">Affiliation</div>
+                        <div className="w-32 flex-shrink-0">Release</div>
                     </div>
                 )}
                 {guesses.map((g) => (
