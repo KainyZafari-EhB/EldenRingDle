@@ -266,7 +266,7 @@ export default function EldenDle() {
                         <div className="mt-8 pt-6 w-full text-center">
                             <button
                                 onClick={() => {
-                                    const text = `Elden-Dle Summary:\n👤 Classic: ${dailyCompletion.classic}\n💬 Quote: ${dailyCompletion.quote}\n✨ Ability: ${dailyCompletion.ability}\n🖼️ Splash: ${dailyCompletion.splash}\nPlay at: eldendle.com`;
+                                    const text = `Elden-Dle Summary:\n👤 Classic: ${dailyCompletion.classic}\n💬 Quote: ${dailyCompletion.quote}\n✨ Ability: ${dailyCompletion.ability}\n🖼️ Splash: ${dailyCompletion.splash}\nPlay at: www.eldendle.com`;
                                     navigator.clipboard.writeText(text);
                                     alert('Copied to clipboard!');
                                 }}
