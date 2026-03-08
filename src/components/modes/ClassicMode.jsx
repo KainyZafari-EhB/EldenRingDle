@@ -104,7 +104,7 @@ export default function ClassicMode({ onWin }) {
                         <div className="w-32 flex-shrink-0">Species</div>
                         <div className="w-32 flex-shrink-0">Weapon</div>
                         <div className="w-32 flex-shrink-0">Region</div>
-                        <div className="w-32 flex-shrink-0">Combat</div>
+                        <div className="w-32 flex-shrink-0">Runes</div>
                         <div className="w-32 flex-shrink-0">Affiliation</div>
                         <div className="w-32 flex-shrink-0">Release</div>
                     </div>

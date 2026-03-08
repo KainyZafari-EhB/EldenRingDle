@@ -6,7 +6,7 @@ export const characters = [
         species: "Empyrean",
         weapon: "Katana",
         region: "Haligtree",
-        combatStyle: "Melee",
+        runes: 480000,
         affiliation: "Unalloyed Gold",
         release: "Base Game",
         image: "/images/malenia.png"
@@ -18,7 +18,7 @@ export const characters = [
         species: "Omen",
         weapon: "Curse/Cane",
         region: "Limgrave",
-        combatStyle: "Hybrid",
+        runes: 12000,
         affiliation: "Golden Order",
         release: "Base Game",
         image: "/images/margit.png"
@@ -30,7 +30,7 @@ export const characters = [
         species: "Empyrean",
         weapon: "None",
         region: "Liurnia",
-        combatStyle: "Magic",
+        runes: null,
         affiliation: "Carian",
         release: "Base Game",
         image: "/images/ranni.png"
@@ -42,7 +42,7 @@ export const characters = [
         species: "Half-Wolf",
         weapon: "Greatsword",
         region: "Liurnia",
-        combatStyle: "Melee",
+        runes: 2520,
         affiliation: "Carian",
         release: "Base Game",
         image: "/images/blaidd.png"
@@ -54,7 +54,7 @@ export const characters = [
         species: "Demi-god",
         weapon: "Greatsword/Bow",
         region: "Caelid",
-        combatStyle: "Hybrid",
+        runes: 70000,
         affiliation: "Redmanes",
         release: "Base Game",
         image: "/images/radahn.png"
@@ -66,7 +66,7 @@ export const characters = [
         species: "Demi-god",
         weapon: "Spear",
         region: "Shadow Realm",
-        combatStyle: "Hybrid",
+        runes: 400000,
         affiliation: "Messmer's Army",
         release: "SotE",
         image: "/images/messmer.png"
@@ -78,7 +78,7 @@ export const characters = [
         species: "Human",
         weapon: "Light Greatswords",
         region: "Shadow Realm",
-        combatStyle: "Hybrid",
+        runes: 240000,
         affiliation: "Messmer's Army",
         release: "SotE",
         image: "/images/rellana.png"
@@ -90,7 +90,7 @@ export const characters = [
         species: "Demi-god",
         weapon: "Axe",
         region: "Limgrave",
-        combatStyle: "Melee",
+        runes: 15000,
         affiliation: "Golden Lineage",
         release: "Base Game",
         image: "/images/godrick.png"
@@ -102,7 +102,7 @@ export const characters = [
         species: "Unknown",
         weapon: "Dagger",
         region: "Unknown",
-        combatStyle: "Melee",
+        runes: null,
         affiliation: "Two Fingers",
         release: "Base Game",
         image: "/images/melina.png"
@@ -114,7 +114,7 @@ export const characters = [
         species: "Tarnished",
         weapon: "Mace",
         region: "Roundtable",
-        combatStyle: "Magic",
+        runes: 180000,
         affiliation: "Roundtable Hold",
         release: "Base Game",
         image: "/images/gideon.png"
@@ -126,7 +126,7 @@ export const characters = [
         species: "Omen",
         weapon: "Cursed Sword",
         region: "Leyndell",
-        combatStyle: "Hybrid",
+        runes: 120000,
         affiliation: "Golden Order",
         release: "Base Game",
         image: "/images/morgott.png"
@@ -138,7 +138,7 @@ export const characters = [
         species: "Omen",
         weapon: "Sacred Spear",
         region: "Mohgwyn Palace",
-        combatStyle: "Hybrid",
+        runes: 420000,
         affiliation: "Lord of Blood",
         release: "Base Game",
         image: "/images/mohg.png"
@@ -150,7 +150,7 @@ export const characters = [
         species: "Serpent",
         weapon: "Blasphemous Blade",
         region: "Mt. Gelmir",
-        combatStyle: "Hybrid",
+        runes: 130000,
         affiliation: "Volcano Manor",
         release: "Base Game",
         image: "/images/rykard.png"
@@ -162,7 +162,7 @@ export const characters = [
         species: "Human",
         weapon: "Staff",
         region: "Liurnia",
-        combatStyle: "Magic",
+        runes: 40000,
         affiliation: "Carian",
         release: "Base Game",
         image: "/images/rennala.png"
@@ -174,7 +174,7 @@ export const characters = [
         species: "God",
         weapon: "Hammer",
         region: "Leyndell",
-        combatStyle: "Hybrid",
+        runes: 500000,
         affiliation: "Golden Order",
         release: "Base Game",
         image: "/images/radagon.png"
@@ -186,7 +186,7 @@ export const characters = [
         species: "God",
         weapon: "Relic Sword",
         region: "Leyndell",
-        combatStyle: "Magic",
+        runes: 500000,
         affiliation: "Greater Will",
         release: "Base Game",
         image: "/images/eldenbeast.png"
@@ -198,7 +198,7 @@ export const characters = [
         species: "Beast",
         weapon: "Black Blade",
         region: "Farum Azula",
-        combatStyle: "Melee",
+        runes: 220000,
         affiliation: "Golden Order",
         release: "Base Game",
         image: "/images/maliketh.png"
@@ -210,7 +210,7 @@ export const characters = [
         species: "Tarnished",
         weapon: "Axe",
         region: "Leyndell",
-        combatStyle: "Melee",
+        runes: 300000,
         affiliation: "Golden Lineage",
         release: "Base Game",
         image: "/images/godfrey.png"
@@ -222,7 +222,7 @@ export const characters = [
         species: "Tarnished",
         weapon: "Fists",
         region: "Leyndell",
-        combatStyle: "Melee",
+        runes: 300000,
         affiliation: "Badlands",
         release: "Base Game",
         image: "/images/hoarahloux.png"
@@ -234,7 +234,7 @@ export const characters = [
         species: "Giant",
         weapon: "Plate/Fire",
         region: "Mountaintops",
-        combatStyle: "Hybrid",
+        runes: 180000,
         affiliation: "Giants",
         release: "Base Game",
         image: "/images/firegiant.png"
@@ -246,7 +246,7 @@ export const characters = [
         species: "Dragon",
         weapon: "Claws/Lightning",
         region: "Farum Azula",
-        combatStyle: "Hybrid",
+        runes: 280000,
         affiliation: "Dragons",
         release: "Base Game",
         image: "/images/placidusax.png"
@@ -258,7 +258,7 @@ export const characters = [
         species: "Dragon",
         weapon: "Lightning",
         region: "Deeproot Depths",
-        combatStyle: "Hybrid",
+        runes: 90000,
         affiliation: "Dragons",
         release: "Base Game",
         image: "/images/fortissax.png"
@@ -270,7 +270,7 @@ export const characters = [
         species: "Alien",
         weapon: "Magic/Pincers",
         region: "Lake of Rot",
-        combatStyle: "Magic",
+        runes: 80000,
         affiliation: "Fallingstar",
         release: "Base Game",
         image: "/images/astel.png"
@@ -282,7 +282,7 @@ export const characters = [
         species: "Human",
         weapon: "Halberd/Lightning",
         region: "Mountaintops",
-        combatStyle: "Hybrid",
+        runes: 90000,
         affiliation: "Commander",
         release: "Base Game",
         image: "/images/niall.png"
@@ -294,7 +294,7 @@ export const characters = [
         species: "Empyrean",
         weapon: "Light/Charm",
         region: "Shadow Realm",
-        combatStyle: "Magic",
+        runes: null,
         affiliation: "Unalloyed Gold",
         release: "SotE",
         image: "/images/miquella.png"
@@ -306,7 +306,7 @@ export const characters = [
         species: "Demi-god",
         weapon: "Greatswords/Light",
         region: "Shadow Realm",
-        combatStyle: "Hybrid",
+        runes: 500000,
         affiliation: "Miquella",
         release: "SotE",
         image: "/images/promisedconsort.png"
@@ -318,7 +318,7 @@ export const characters = [
         species: "Lord",
         weapon: "Greatsword/Frenzy",
         region: "Abyssal Woods",
-        combatStyle: "Hybrid",
+        runes: 410000,
         affiliation: "Frenzied Flame",
         release: "SotE",
         image: "/images/midra.png"
@@ -330,7 +330,7 @@ export const characters = [
         species: "Dragon",
         weapon: "Fire/Lightning",
         region: "Jagged Peak",
-        combatStyle: "Hybrid",
+        runes: 490000,
         affiliation: "Dragons",
         release: "SotE",
         image: "/images/bayle.png"
@@ -342,7 +342,7 @@ export const characters = [
         species: "Centipede",
         weapon: "Poleblade/Rot",
         region: "Rauh Ruins",
-        combatStyle: "Hybrid",
+        runes: 380000,
         affiliation: "Scarlet Rot",
         release: "SotE",
         image: "/images/romina.png"
@@ -354,7 +354,7 @@ export const characters = [
         species: "Undead",
         weapon: "Cleaver/Ghostflame",
         region: "Cerulean Coast",
-        combatStyle: "Hybrid",
+        runes: 220000,
         affiliation: "St. Trina",
         release: "SotE",
         image: "/images/putrescent.png"
