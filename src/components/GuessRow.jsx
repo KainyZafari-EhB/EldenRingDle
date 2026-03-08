@@ -9,8 +9,13 @@ export default function GuessRow({ guess, target }) {
 
         // Partial matches for weapon
         if (category === 'weapon') {
-            if (guessVal && targetVal && (guessVal.includes(targetVal) || targetVal.includes(guessVal))) {
-                return 'bg-elden-orange text-elden-black border-elden-orange shadow-[0_0_15px_rgba(251,146,60,0.4)]';
+            if (guessVal && targetVal) {
+                const guessWeapons = String(guessVal).split('/').map(w => w.trim());
+                const targetWeapons = String(targetVal).split('/').map(w => w.trim());
+                const hasOverlap = guessWeapons.some(w => targetWeapons.includes(w));
+                if (hasOverlap && guessVal !== targetVal) {
+                    return 'bg-elden-orange text-elden-black border-elden-orange shadow-[0_0_15px_rgba(251,146,60,0.4)]';
+                }
             }
         }
 
@@ -45,6 +50,9 @@ export default function GuessRow({ guess, target }) {
     const renderCellValue = (cat) => {
         if (cat.key === 'runes') {
             return formatRunes(guess[cat.key]) + getRuneArrow(guess[cat.key], target[cat.key]);
+        }
+        if (cat.key === 'weapon' && typeof guess[cat.key] === 'string') {
+            return guess[cat.key].replace(/\//g, ' / ');
         }
         return guess[cat.key];
     };
