@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import CountdownTimer from './CountdownTimer';
 import { getEldenDleDayIndex } from '../hooks/useDaily';
 import Navigation from './Navigation';
 import ClassicMode from './modes/ClassicMode';
@@ -274,7 +275,7 @@ export default function EldenDle() {
                                 Share Results
                             </button>
                             <p className="text-gray-400 font-bold uppercase tracking-widest text-[10px] md:text-xs mt-4">
-                                New targets arrive at 23:00. Rest at the site of grace until then.
+                                Next challenge in <CountdownTimer className="text-elden-gold" />
                             </p>
                         </div>
                     </div>
