@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { characters } from '../../data/characters';
-import { getEldenDleDayIndex, getDailyTargetIndex } from '../../hooks/useDaily';
+import { getEldenDleDayIndex, getDailyTargetIndex, getYesterdayDayIndex } from '../../hooks/useDaily';
 import Search from '../Search';
 import GuessRow from '../GuessRow';
 import VictoryCard from '../VictoryCard';
@@ -10,6 +10,13 @@ export default function ClassicMode({ onWin }) {
     const [guesses, setGuesses] = useState([]);
     const [hasCompletedToday, setHasCompletedToday] = useState(false);
     const [dayIndex, setDayIndex] = useState('');
+    const [revealedHints, setRevealedHints] = useState({});
+
+    const yesterdayChampion = useMemo(() => {
+        const yesterdayIndex = getYesterdayDayIndex();
+        const targetIdx = getDailyTargetIndex(yesterdayIndex, "classic", characters.length);
+        return characters[targetIdx];
+    }, []);
 
     useEffect(() => {
         // Calculate the 'day'
@@ -68,20 +75,34 @@ export default function ClassicMode({ onWin }) {
                 <div className="w-full flex flex-col items-center">
                     <div className="flex gap-4 w-full justify-center max-w-md">
                         {/* Hint 1 Logic */}
-                        <div className="mb-4 bg-elden-black border border-elden-gold/40 p-3 rounded-lg flex-1 flex flex-col items-center justify-center text-xs tracking-widest uppercase transition-all duration-300">
+                        <div
+                            className={`mb-4 bg-elden-black border border-elden-gold/40 p-3 rounded-lg flex-1 flex flex-col items-center justify-center text-xs tracking-widest uppercase transition-all duration-300 ${guesses.length >= 3 && !revealedHints.hint1 ? 'cursor-pointer hover:border-elden-gold hover:bg-elden-gold/5' : ''}`}
+                            onClick={() => { if (guesses.length >= 3 && !revealedHints.hint1) setRevealedHints(p => ({ ...p, hint1: true })); }}
+                        >
                             <span className="text-gray-400 mb-1">Hint 1 (Species)</span>
                             {guesses.length >= 3 ? (
-                                <span className="text-elden-gold font-bold text-sm animate-[fadeIn_0.5s_ease-out]">{target.species}</span>
+                                revealedHints.hint1 ? (
+                                    <span className="text-elden-gold font-bold text-sm animate-[fadeIn_0.5s_ease-out]">{target.species}</span>
+                                ) : (
+                                    <span className="text-elden-gold/70 font-bold text-[10px] mt-1">Click to reveal</span>
+                                )
                             ) : (
                                 <span className="text-gray-500 font-bold text-[10px] mt-1">Unlocks in {3 - guesses.length} guess{3 - guesses.length !== 1 ? 'es' : ''}</span>
                             )}
                         </div>
 
                         {/* Hint 2 Logic */}
-                        <div className="mb-4 bg-elden-black border border-elden-gold/40 p-3 rounded-lg flex-1 flex flex-col items-center justify-center text-xs tracking-widest uppercase transition-all duration-300">
+                        <div
+                            className={`mb-4 bg-elden-black border border-elden-gold/40 p-3 rounded-lg flex-1 flex flex-col items-center justify-center text-xs tracking-widest uppercase transition-all duration-300 ${guesses.length >= 6 && !revealedHints.hint2 ? 'cursor-pointer hover:border-elden-gold hover:bg-elden-gold/5' : ''}`}
+                            onClick={() => { if (guesses.length >= 6 && !revealedHints.hint2) setRevealedHints(p => ({ ...p, hint2: true })); }}
+                        >
                             <span className="text-gray-400 mb-1">Hint 2 (Region)</span>
                             {guesses.length >= 6 ? (
-                                <span className="text-elden-gold font-bold text-sm animate-[fadeIn_0.5s_ease-out]">{target.region}</span>
+                                revealedHints.hint2 ? (
+                                    <span className="text-elden-gold font-bold text-sm animate-[fadeIn_0.5s_ease-out]">{target.region}</span>
+                                ) : (
+                                    <span className="text-elden-gold/70 font-bold text-[10px] mt-1">Click to reveal</span>
+                                )
                             ) : (
                                 <span className="text-gray-500 font-bold text-[10px] mt-1">Unlocks in {6 - guesses.length} guess{6 - guesses.length !== 1 ? 'es' : ''}</span>
                             )}
@@ -104,7 +125,7 @@ export default function ClassicMode({ onWin }) {
                         <div className="w-32 flex-shrink-0">Species</div>
                         <div className="w-32 flex-shrink-0">Weapon</div>
                         <div className="w-32 flex-shrink-0">Region</div>
-                        <div className="w-32 flex-shrink-0">Combat</div>
+                        <div className="w-32 flex-shrink-0">Runes</div>
                         <div className="w-32 flex-shrink-0">Affiliation</div>
                         <div className="w-32 flex-shrink-0">Release</div>
                     </div>
@@ -112,6 +133,14 @@ export default function ClassicMode({ onWin }) {
                 {guesses.map((g) => (
                     <GuessRow key={g.id} guess={g} target={target} />
                 ))}
+            </div>
+
+            {/* Yesterday's Champion */}
+            <div className="mt-8 mb-4 text-center w-full">
+                <p className="text-gray-500 text-xs uppercase tracking-widest">
+                    Yesterday's champion was{' '}
+                    <span className="text-elden-gold font-bold">{yesterdayChampion?.name}</span>
+                </p>
             </div>
         </div>
     );

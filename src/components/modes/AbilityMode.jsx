@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { characters } from '../../data/characters';
 import { abilities } from '../../data/abilities';
-import { getEldenDleDayIndex, getDailyTargetIndex } from '../../hooks/useDaily';
+import { getEldenDleDayIndex, getDailyTargetIndex, getYesterdayDayIndex } from '../../hooks/useDaily';
 import Search from '../Search';
 import SimpleGuessRow from '../SimpleGuessRow';
 import VictoryCard from '../VictoryCard';
@@ -12,6 +12,14 @@ export default function AbilityMode({ onWin }) {
     const [guesses, setGuesses] = useState([]);
     const [hasCompletedToday, setHasCompletedToday] = useState(false);
     const [dayIndex, setDayIndex] = useState('');
+    const [revealedHints, setRevealedHints] = useState({});
+
+    const yesterdayChampion = useMemo(() => {
+        const yesterdayIndex = getYesterdayDayIndex();
+        const targetIdx = getDailyTargetIndex(yesterdayIndex, "ability", abilities.length);
+        const yesterdayAbility = abilities[targetIdx];
+        return characters.find(c => c.id === yesterdayAbility.characterId);
+    }, []);
 
     useEffect(() => {
         const currentDayIndex = getEldenDleDayIndex();
@@ -92,18 +100,32 @@ export default function AbilityMode({ onWin }) {
             {/* Progressive Hints */}
             {!hasCompletedToday && !isWin && (
                 <div className="flex flex-wrap gap-3 justify-center mb-6 w-full max-w-sm">
-                    <div className="bg-[#151515] border border-white/10 px-4 py-2.5 rounded-lg flex flex-col items-center flex-1 min-w-[120px]">
+                    <div
+                        className={`bg-[#151515] border border-white/10 px-4 py-2.5 rounded-lg flex flex-col items-center flex-1 min-w-[120px] transition-all duration-300 ${guesses.length >= 2 && !revealedHints.hint1 ? 'cursor-pointer hover:border-elden-gold/50 hover:bg-white/5' : ''}`}
+                        onClick={() => { if (guesses.length >= 2 && !revealedHints.hint1) setRevealedHints(p => ({ ...p, hint1: true })); }}
+                    >
                         <span className="text-gray-500 text-[10px] uppercase tracking-widest font-semibold mb-1">Region</span>
                         {guesses.length >= 2 ? (
-                            <span className="text-elden-gold font-bold text-sm">{targetChar.region}</span>
+                            revealedHints.hint1 ? (
+                                <span className="text-elden-gold font-bold text-sm">{targetChar.region}</span>
+                            ) : (
+                                <span className="text-elden-gold/70 font-bold text-[10px]">Click to reveal</span>
+                            )
                         ) : (
                             <span className="text-gray-600 text-[10px] font-bold">{2 - guesses.length} guess{2 - guesses.length !== 1 ? 'es' : ''}</span>
                         )}
                     </div>
-                    <div className="bg-[#151515] border border-white/10 px-4 py-2.5 rounded-lg flex flex-col items-center flex-1 min-w-[120px]">
+                    <div
+                        className={`bg-[#151515] border border-white/10 px-4 py-2.5 rounded-lg flex flex-col items-center flex-1 min-w-[120px] transition-all duration-300 ${guesses.length >= 4 && !revealedHints.hint2 ? 'cursor-pointer hover:border-elden-gold/50 hover:bg-white/5' : ''}`}
+                        onClick={() => { if (guesses.length >= 4 && !revealedHints.hint2) setRevealedHints(p => ({ ...p, hint2: true })); }}
+                    >
                         <span className="text-gray-500 text-[10px] uppercase tracking-widest font-semibold mb-1">Species</span>
                         {guesses.length >= 4 ? (
-                            <span className="text-elden-gold font-bold text-sm">{targetChar.species}</span>
+                            revealedHints.hint2 ? (
+                                <span className="text-elden-gold font-bold text-sm">{targetChar.species}</span>
+                            ) : (
+                                <span className="text-elden-gold/70 font-bold text-[10px]">Click to reveal</span>
+                            )
                         ) : (
                             <span className="text-gray-600 text-[10px] font-bold">{4 - guesses.length} guess{4 - guesses.length !== 1 ? 'es' : ''}</span>
                         )}
@@ -125,6 +147,14 @@ export default function AbilityMode({ onWin }) {
                 {guesses.map((g) => (
                     <SimpleGuessRow key={g.id} guess={g} target={targetChar} />
                 ))}
+            </div>
+
+            {/* Yesterday's Champion */}
+            <div className="mt-8 mb-4 text-center w-full">
+                <p className="text-gray-500 text-xs uppercase tracking-widest">
+                    Yesterday's champion was{' '}
+                    <span className="text-elden-gold font-bold">{yesterdayChampion?.name}</span>
+                </p>
             </div>
         </div>
     );

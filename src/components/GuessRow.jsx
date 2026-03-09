@@ -7,14 +7,15 @@ export default function GuessRow({ guess, target }) {
             return 'bg-elden-green text-elden-black border-elden-green shadow-[0_0_15px_rgba(74,222,128,0.4)]';
         }
 
-        // Partial matches
-        if (category === 'combatStyle' || category === 'weapon') {
-            if (
-                (guessVal && targetVal && (guessVal.includes(targetVal) || targetVal.includes(guessVal))) ||
-                (guessVal === 'Hybrid' && (targetVal === 'Melee' || targetVal === 'Magic' || targetVal === 'Ranged')) ||
-                (targetVal === 'Hybrid' && (guessVal === 'Melee' || guessVal === 'Magic' || guessVal === 'Ranged'))
-            ) {
-                return 'bg-elden-orange text-elden-black border-elden-orange shadow-[0_0_15px_rgba(251,146,60,0.4)]';
+        // Partial matches for weapon
+        if (category === 'weapon') {
+            if (guessVal && targetVal) {
+                const guessWeapons = String(guessVal).split('/').map(w => w.trim());
+                const targetWeapons = String(targetVal).split('/').map(w => w.trim());
+                const hasOverlap = guessWeapons.some(w => targetWeapons.includes(w));
+                if (hasOverlap && guessVal !== targetVal) {
+                    return 'bg-elden-orange text-elden-black border-elden-orange shadow-[0_0_15px_rgba(251,146,60,0.4)]';
+                }
             }
         }
 
@@ -22,17 +23,39 @@ export default function GuessRow({ guess, target }) {
         return 'bg-elden-red text-white border-elden-red shadow-[0_0_10px_rgba(248,113,113,0.3)]';
     };
 
+    const formatRunes = (val) => {
+        if (val === null) return 'N/A';
+        if (val === 0) return '0';
+        return val.toLocaleString();
+    };
+
+    const getRuneArrow = (guessVal, targetVal) => {
+        if (guessVal === null || targetVal === null) return '';
+        if (guessVal === targetVal) return '';
+        return guessVal < targetVal ? ' ↑' : ' ↓';
+    };
+
     const categories = [
         { key: 'gender', label: 'Gender' },
         { key: 'species', label: 'Species' },
         { key: 'weapon', label: 'Weapon' },
         { key: 'region', label: 'Region' },
-        { key: 'combatStyle', label: 'Combat' },
+        { key: 'runes', label: 'Runes' },
         { key: 'affiliation', label: 'Affiliation' },
         { key: 'release', label: 'Release' },
     ];
 
     const getInitials = (name) => name.substring(0, 2).toUpperCase();
+
+    const renderCellValue = (cat) => {
+        if (cat.key === 'runes') {
+            return formatRunes(guess[cat.key]) + getRuneArrow(guess[cat.key], target[cat.key]);
+        }
+        if (cat.key === 'weapon' && typeof guess[cat.key] === 'string') {
+            return guess[cat.key].replace(/\//g, ' / ');
+        }
+        return guess[cat.key];
+    };
 
     return (
         <>
@@ -60,7 +83,7 @@ export default function GuessRow({ guess, target }) {
                             className={`animate-flip-in flex-shrink-0 w-32 h-20 tile ${colorClass} snap-start`}
                             style={{ animationDelay: `${(idx + 1) * 500}ms` }}
                         >
-                            {guess[cat.key]}
+                            {renderCellValue(cat)}
                         </div>
                     );
                 })}
@@ -96,7 +119,7 @@ export default function GuessRow({ guess, target }) {
                                     style={{ animationDelay: `${(idx + 1) * 300}ms` }}
                                 >
                                     <span className="text-[8px] uppercase tracking-wider opacity-70 font-semibold mb-0.5 leading-tight">{cat.label}</span>
-                                    <span className="text-[10px] font-bold leading-tight">{guess[cat.key]}</span>
+                                    <span className="text-[10px] font-bold leading-tight">{renderCellValue(cat)}</span>
                                 </div>
                             );
                         })}

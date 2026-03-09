@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { characters } from '../../data/characters';
 import { splashes } from '../../data/splashes';
-import { getEldenDleDayIndex, getDailyTargetIndex } from '../../hooks/useDaily';
+import { getEldenDleDayIndex, getDailyTargetIndex, getYesterdayDayIndex } from '../../hooks/useDaily';
 import Search from '../Search';
 import SimpleGuessRow from '../SimpleGuessRow';
 import VictoryCard from '../VictoryCard';
@@ -12,6 +12,13 @@ export default function SplashMode({ onWin }) {
     const [guesses, setGuesses] = useState([]);
     const [hasCompletedToday, setHasCompletedToday] = useState(false);
     const [dayIndex, setDayIndex] = useState('');
+
+    const yesterdayChampion = useMemo(() => {
+        const yesterdayIndex = getYesterdayDayIndex();
+        const targetIdx = getDailyTargetIndex(yesterdayIndex, "splash", splashes.length);
+        const yesterdaySplash = splashes[targetIdx];
+        return characters.find(c => c.id === yesterdaySplash.characterId);
+    }, []);
 
     useEffect(() => {
         const currentDayIndex = getEldenDleDayIndex();
@@ -54,10 +61,9 @@ export default function SplashMode({ onWin }) {
     if (!targetSplash || !targetChar) return <div className="text-elden-gold">Summoning...</div>;
     const isWin = guesses.length > 0 && guesses[0].id === targetChar.id;
 
-    // Calculate zoom level based on number of guesses. 
-    // Start super zoomed in (e.g. scale 400%), and zoom out slightly with each wrong guess.
-    const zoomLevel = Math.max(100, 400 - (guesses.length * 40));
-    const blurLevel = Math.max(0, 10 - (guesses.length * 2));
+    // Calculate blur level based on number of guesses. 
+    // Start blurry and unblur slightly with each wrong guess.
+    const blurLevel = Math.max(0, 45 - (guesses.length * 5));
 
     return (
         <div className="w-full max-w-[1200px] flex flex-col items-center">
@@ -70,22 +76,20 @@ export default function SplashMode({ onWin }) {
                     {/* Placeholder for actual cropped image */}
                     {targetChar.image ? (
                         <div
-                            className="w-full h-full absolute inset-0 bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
+                            className="w-full h-full absolute inset-0 bg-center bg-cover bg-no-repeat transition-all duration-1000 ease-in-out"
                             style={{
                                 backgroundImage: `url(${targetChar.image})`,
-                                backgroundSize: isWin ? 'cover' : `${zoomLevel}%`,
                                 filter: isWin ? 'none' : `blur(${blurLevel}px)`
                             }}
                         />
                     ) : (
                         <div className={`w-full h-full absolute inset-0 transition-all duration-1000 ease-in-out ${targetSplash.placeholderColor}`}
                             style={{
-                                transform: `scale(${zoomLevel / 100})`,
                                 filter: isWin ? 'none' : `blur(${blurLevel}px)`
                             }}
                         >
                             <div className="w-full h-full flex items-center justify-center opacity-30 text-white font-bold text-center tracking-widest uppercase rotate-[-20deg]">
-                                Zoomed Image Placeholder <br /> {targetSplash.hint}
+                                Image Placeholder <br /> {targetSplash.hint}
                             </div>
                         </div>
                     )}
@@ -100,7 +104,7 @@ export default function SplashMode({ onWin }) {
                 </div>
 
                 <p className="mt-4 text-xs text-elden-gold/60 uppercase tracking-widest font-bold">
-                    {isWin ? 'Full Image Revealed!' : 'Image zooms out & unblurs with every guess'}
+                    {isWin ? 'Full Image Revealed!' : 'Image unblurs with every guess'}
                 </p>
             </div>
 
@@ -118,6 +122,14 @@ export default function SplashMode({ onWin }) {
                 {guesses.map((g) => (
                     <SimpleGuessRow key={g.id} guess={g} target={targetChar} />
                 ))}
+            </div>
+
+            {/* Yesterday's Champion */}
+            <div className="mt-8 mb-4 text-center w-full">
+                <p className="text-gray-500 text-xs uppercase tracking-widest">
+                    Yesterday's champion was{' '}
+                    <span className="text-elden-gold font-bold">{yesterdayChampion?.name}</span>
+                </p>
             </div>
         </div>
     );

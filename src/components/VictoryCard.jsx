@@ -1,4 +1,5 @@
 import React from 'react';
+import CountdownTimer from './CountdownTimer';
 
 export default function VictoryCard({ characterName, characterImage }) {
     return (
@@ -16,7 +17,7 @@ export default function VictoryCard({ characterName, characterImage }) {
                 <span className="text-elden-green text-sm">✓</span>
             </div>
             <p className="text-gray-600 text-[11px] tracking-wide">
-                Come back tomorrow for a new challenge
+                Next puzzle in <CountdownTimer className="text-elden-gold font-bold" />
             </p>
         </div>
     );
