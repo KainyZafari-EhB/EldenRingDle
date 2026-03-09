@@ -63,7 +63,7 @@ export default function SplashMode({ onWin }) {
 
     // Calculate blur level based on number of guesses. 
     // Start blurry and unblur slightly with each wrong guess.
-    const blurLevel = Math.max(0, 45 - (guesses.length * 5));
+    const blurLevel = Math.max(0, 25 - (guesses.length * 5));
 
     return (
         <div className="w-full max-w-[1200px] flex flex-col items-center">
