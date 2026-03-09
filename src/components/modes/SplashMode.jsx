@@ -61,10 +61,9 @@ export default function SplashMode({ onWin }) {
     if (!targetSplash || !targetChar) return <div className="text-elden-gold">Summoning...</div>;
     const isWin = guesses.length > 0 && guesses[0].id === targetChar.id;
 
-    // Calculate zoom level based on number of guesses. 
-    // Start super zoomed in (e.g. scale 400%), and zoom out slightly with each wrong guess.
-    const zoomLevel = Math.max(100, 400 - (guesses.length * 40));
-    const blurLevel = Math.max(0, 10 - (guesses.length * 2));
+    // Calculate blur level based on number of guesses. 
+    // Start blurry and unblur slightly with each wrong guess.
+    const blurLevel = Math.max(0, 45 - (guesses.length * 5));
 
     return (
         <div className="w-full max-w-[1200px] flex flex-col items-center">
@@ -77,22 +76,20 @@ export default function SplashMode({ onWin }) {
                     {/* Placeholder for actual cropped image */}
                     {targetChar.image ? (
                         <div
-                            className="w-full h-full absolute inset-0 bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
+                            className="w-full h-full absolute inset-0 bg-center bg-cover bg-no-repeat transition-all duration-1000 ease-in-out"
                             style={{
                                 backgroundImage: `url(${targetChar.image})`,
-                                backgroundSize: isWin ? 'cover' : `${zoomLevel}%`,
                                 filter: isWin ? 'none' : `blur(${blurLevel}px)`
                             }}
                         />
                     ) : (
                         <div className={`w-full h-full absolute inset-0 transition-all duration-1000 ease-in-out ${targetSplash.placeholderColor}`}
                             style={{
-                                transform: `scale(${zoomLevel / 100})`,
                                 filter: isWin ? 'none' : `blur(${blurLevel}px)`
                             }}
                         >
                             <div className="w-full h-full flex items-center justify-center opacity-30 text-white font-bold text-center tracking-widest uppercase rotate-[-20deg]">
-                                Zoomed Image Placeholder <br /> {targetSplash.hint}
+                                Image Placeholder <br /> {targetSplash.hint}
                             </div>
                         </div>
                     )}
@@ -107,7 +104,7 @@ export default function SplashMode({ onWin }) {
                 </div>
 
                 <p className="mt-4 text-xs text-elden-gold/60 uppercase tracking-widest font-bold">
-                    {isWin ? 'Full Image Revealed!' : 'Image zooms out & unblurs with every guess'}
+                    {isWin ? 'Full Image Revealed!' : 'Image unblurs with every guess'}
                 </p>
             </div>
 
