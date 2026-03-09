@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { characters } from '../../data/characters';
 import { quotes } from '../../data/quotes';
-import { getEldenDleDayIndex, getDailyTargetIndex } from '../../hooks/useDaily';
+import { getEldenDleDayIndex, getDailyTargetIndex, getYesterdayDayIndex } from '../../hooks/useDaily';
 import Search from '../Search';
 import SimpleGuessRow from '../SimpleGuessRow';
 import VictoryCard from '../VictoryCard';
@@ -13,6 +13,13 @@ export default function QuoteMode({ onWin }) {
     const [hasCompletedToday, setHasCompletedToday] = useState(false);
     const [dayIndex, setDayIndex] = useState('');
     const [revealedHints, setRevealedHints] = useState({});
+
+    const yesterdayChampion = useMemo(() => {
+        const yesterdayIndex = getYesterdayDayIndex();
+        const targetIdx = getDailyTargetIndex(yesterdayIndex, "quote", quotes.length);
+        const yesterdayQuote = quotes[targetIdx];
+        return characters.find(c => c.id === yesterdayQuote.characterId);
+    }, []);
 
     useEffect(() => {
         const currentDayIndex = getEldenDleDayIndex();
@@ -143,6 +150,14 @@ export default function QuoteMode({ onWin }) {
                 {guesses.map((g) => (
                     <SimpleGuessRow key={g.id} guess={g} target={targetChar} />
                 ))}
+            </div>
+
+            {/* Yesterday's Champion */}
+            <div className="mt-8 mb-4 text-center w-full">
+                <p className="text-gray-500 text-xs uppercase tracking-widest">
+                    Yesterday's champion was{' '}
+                    <span className="text-elden-gold font-bold">{yesterdayChampion?.name}</span>
+                </p>
             </div>
         </div>
     );

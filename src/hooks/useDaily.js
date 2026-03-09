@@ -32,3 +32,13 @@ export function getDailyTargetIndex(dayIndexString, seedModifier, maxNumber) {
     // Return an index within the bounds of the array
     return positiveHash % maxNumber;
 }
+
+export function getYesterdayDayIndex() {
+    const now = new Date();
+    const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    const shiftedTime = new Date(yesterday.getTime() + (1 * 60 * 60 * 1000));
+    const year = shiftedTime.getFullYear();
+    const month = String(shiftedTime.getMonth() + 1).padStart(2, '0');
+    const day = String(shiftedTime.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
