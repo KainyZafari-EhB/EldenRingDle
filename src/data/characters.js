@@ -357,6 +357,7 @@ export const characters = [
         runes: 220000,
         affiliation: "St. Trina",
         release: "SotE",
+        image: "/images/putrescentknight.png"
     },
     {
         id: 31,
@@ -525,5 +526,29 @@ export const characters = [
         affiliation: "Golden Lineage/Roundtable",
         release: "Base Game",
         image: "/images/nepheli.png"
+    },
+    {
+        id: 45,
+        name: "Hewg",
+        gender: "Male",
+        species: "Misbegotten",
+        weapon: "Hammer",
+        region: "Roundtable",
+        runes: null,
+        affiliation: "Golden Order/Roundtable",
+        release: "Base Game",
+        image: "/images/hewg.png"
+    },
+    {
+        id: 46,
+        name: "Iji",
+        gender: "Male",
+        species: "Troll",
+        weapon: "Hammer",
+        region: "Liurnia",
+        runes: null,
+        affiliation: "Carian",
+        release: "Base Game",
+        image: "/images/iji.png"
     }
 ];

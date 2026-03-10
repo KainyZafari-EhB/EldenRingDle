@@ -135,5 +135,13 @@ export const quotes = [
 
     // Nepheli Loux (id: 44)
     { id: 104, characterId: 44, text: "Justice to the oppressors. Let the scars I carve remind them. I am Nepheli Loux, Warrior." },
-    { id: 105, characterId: 44, text: "Should you become Elden Lord. I would gladly lighten your burden." }
+    { id: 105, characterId: 44, text: "Should you become Elden Lord. I would gladly lighten your burden." },
+
+    // Hewg (id: 45)
+    { id: 106, characterId: 45, text: "Given time, technique never fails." },
+    { id: 107, characterId: 45, text: "Your divinity, have mercy, and grant me forgiveness. The road is yet long. A God is not easily felled. But one day, without fail, you will have your wish. So please, grant me forgiveness, Queen Marika..." },
+
+    // Iji (id: 46)
+    { id: 108, characterId: 46, text: "I am Iji. A blacksmith who once served the Carian royals. An old codger who refuses to retire his rusty hammer." },
+    { id: 109, characterId: 46, text: "Should you and Blaidd meet in the next life... I can only hope that he forgives me." }
 ];
