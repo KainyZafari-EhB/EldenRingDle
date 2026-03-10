@@ -108,4 +108,32 @@ export const quotes = [
     // Midra (id: 27)
     { id: 41, characterId: 27, text: "The depths of your foolishness!" },
     { id: 42, characterId: 27, text: "Enough. I have endured... more than enough." },
+
+    // Marika (id: 31)
+    { id: 81, characterId: 31, text: "O Radagon, leal hound of the Golden Order. Thou'rt yet to become me. Thou'rt yet to become a god. Let us be shattered, both. Mine other self." },
+    { id: 82, characterId: 31, text: "My Lord, and thy warriors. I divest each of thee of thy grace. With thine eyes dimmed, ye will be driven from the Lands Between." },
+
+    // Alexander (id: 32)
+    { id: 83, characterId: 32, text: "Once again, the pleasure is mine. I am the warrior jar known as Alexander. Iron Fist Alexander, in fact." },
+    { id: 84, characterId: 32, text: "Lend me strength, O warriors within! Let us become one champion, together!" },
+
+    // Millicent (id: 33)
+    { id: 85, characterId: 33, text: "My flesh writhes with scarlet rot. It is a curse. Not to be meddled with by man." },
+    { id: 86, characterId: 33, text: "I would rather trust you, than simply continue to spoil from within." },
+
+    // Patches (id: 36)
+    { id: 91, characterId: 36, text: "I'm Patches. Patches the Untethered. Tarnished, like you, only, free-spirited. Nomadic, you might say." },
+    { id: 92, characterId: 36, text: "Well, well, well? Thought you'd just help yourself to a man's personal belongings?" },
+
+    // Fia (id: 39)
+    { id: 95, characterId: 39, text: "Great champion, would you allow me to hold you, but briefly?" },
+    { id: 96, characterId: 39, text: "Disturb not the Death of Godwyn, the exalted. We, who humbly live in Death...Live in waiting, to one day welcome our Lord." },
+
+    // Dung Eater (id: 40)
+    { id: 97, characterId: 40, text: "I've been here long enough. I will kill again. And defile each corpse with care." },
+    { id: 98, characterId: 40, text: "I am the Dung Eater! A scourge upon the living!" },
+
+    // Nepheli Loux (id: 44)
+    { id: 104, characterId: 44, text: "Justice to the oppressors. Let the scars I carve remind them. I am Nepheli Loux, Warrior." },
+    { id: 105, characterId: 44, text: "Should you become Elden Lord. I would gladly lighten your burden." }
 ];

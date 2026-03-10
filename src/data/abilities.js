@@ -74,4 +74,51 @@ export const abilities = [
 
     // Gideon (id: 10)
     { id: 30, characterId: 10, name: "All-Knowing", type: "Skill" },
+
+    // Alexander (id: 32)
+    { id: 33, characterId: 32, name: "Spinning Strike", type: "Skill" },
+    { id: 34, characterId: 32, name: "Jar Uppercut", type: "Skill" },
+
+    // Millicent (id: 33)
+    { id: 36, characterId: 33, name: "Prosthesis Mastery", type: "Skill" },
+
+    // Ancestor Spirit (id: 34)
+    { id: 37, characterId: 34, name: "Leaping Smash", type: "Skill" },
+    { id: 38, characterId: 34, name: "Spectral Breath", type: "Skill" },
+
+    // Patches (id: 36)
+    { id: 41, characterId: 36, name: "Deceptive Kick", type: "Skill" },
+    { id: 42, characterId: 36, name: "Poison Mist", type: "Incantation" },
+
+    // Loretta (id: 37)
+    { id: 43, characterId: 37, name: "Loretta's Mastery", type: "Sorcery" },
+    { id: 44, characterId: 37, name: "Loretta's Slash", type: "Skill" },
+
+    // Godskin Noble (id: 38)
+    { id: 45, characterId: 38, name: "Black Flame Pillars", type: "Incantation" },
+    { id: 46, characterId: 38, name: "Belly Roll", type: "Skill" },
+
+    // Fia (id: 39)
+    { id: 47, characterId: 39, name: "Baldachin's Blessing", type: "Skill" },
+    { id: 48, characterId: 39, name: "Summon Elden Lord", type: "Sorcery" },
+
+    // Dung Eater (id: 40)
+    { id: 49, characterId: 40, name: "Shriek of Milos", type: "Skill" },
+    { id: 50, characterId: 40, name: "Omen Cleaver Slam", type: "Skill" },
+
+    // Commander Gaius (id: 41)
+    { id: 51, characterId: 41, name: "Wild Boar Rush", type: "Skill" },
+    { id: 52, characterId: 41, name: "Gravity Orb", type: "Sorcery" },
+
+    // Scadutree Avatar (id: 42)
+    { id: 53, characterId: 42, name: "Thorn Sorcery", type: "Skill" },
+    { id: 54, characterId: 42, name: "Holy Light Pillar", type: "Skill" },
+
+    // Metyr (id: 43)
+    { id: 55, characterId: 43, name: "Microcosm Laser", type: "Skill" },
+    { id: 56, characterId: 43, name: "Finger Spawn", type: "Skill" },
+
+    // Nepheli Loux (id: 44)
+    { id: 57, characterId: 44, name: "Thunderstorm", type: "Skill" },
+    { id: 58, characterId: 44, name: "Stormhawk Axes", type: "Skill" }
 ];
