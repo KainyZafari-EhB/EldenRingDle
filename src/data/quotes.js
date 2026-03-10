@@ -114,7 +114,7 @@ export const quotes = [
     { id: 82, characterId: 31, text: "My Lord, and thy warriors. I divest each of thee of thy grace. With thine eyes dimmed, ye will be driven from the Lands Between." },
 
     // Alexander (id: 32)
-    { id: 83, characterId: 32, text: "Once again, the pleasure is mine. I am the warrior jar known as Alexander. Iron Fist Alexander, in fact." },
+    { id: 83, characterId: 32, text: "Once again, the pleasure is mine. I am the warrior jar known as [..]. Iron Fist [..], in fact." },
     { id: 84, characterId: 32, text: "Lend me strength, O warriors within! Let us become one champion, together!" },
 
     // Millicent (id: 33)
@@ -122,7 +122,7 @@ export const quotes = [
     { id: 86, characterId: 33, text: "I would rather trust you, than simply continue to spoil from within." },
 
     // Patches (id: 36)
-    { id: 91, characterId: 36, text: "I'm Patches. Patches the Untethered. Tarnished, like you, only, free-spirited. Nomadic, you might say." },
+    { id: 91, characterId: 36, text: "I'm [..], [..] the Untethered. Tarnished, like you, only, free-spirited. Nomadic, you might say." },
     { id: 92, characterId: 36, text: "Well, well, well? Thought you'd just help yourself to a man's personal belongings?" },
 
     // Fia (id: 39)
@@ -131,10 +131,10 @@ export const quotes = [
 
     // Dung Eater (id: 40)
     { id: 97, characterId: 40, text: "I've been here long enough. I will kill again. And defile each corpse with care." },
-    { id: 98, characterId: 40, text: "I am the Dung Eater! A scourge upon the living!" },
+    { id: 98, characterId: 40, text: "I am the [..]! A scourge upon the living!" },
 
     // Nepheli Loux (id: 44)
-    { id: 104, characterId: 44, text: "Justice to the oppressors. Let the scars I carve remind them. I am Nepheli Loux, Warrior." },
+    { id: 104, characterId: 44, text: "Justice to the oppressors. Let the scars I carve remind them. I am [..], Warrior." },
     { id: 105, characterId: 44, text: "Should you become Elden Lord. I would gladly lighten your burden." },
 
     // Hewg (id: 45)
@@ -142,6 +142,6 @@ export const quotes = [
     { id: 107, characterId: 45, text: "Your divinity, have mercy, and grant me forgiveness. The road is yet long. A God is not easily felled. But one day, without fail, you will have your wish. So please, grant me forgiveness, Queen Marika..." },
 
     // Iji (id: 46)
-    { id: 108, characterId: 46, text: "I am Iji. A blacksmith who once served the Carian royals. An old codger who refuses to retire his rusty hammer." },
+    { id: 108, characterId: 46, text: "I am [..]. A blacksmith who once served the Carian royals. An old codger who refuses to retire his rusty hammer." },
     { id: 109, characterId: 46, text: "Should you and Blaidd meet in the next life... I can only hope that he forgives me." }
 ];
