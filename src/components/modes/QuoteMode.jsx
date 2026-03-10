@@ -13,6 +13,7 @@ export default function QuoteMode({ onWin }) {
     const [hasCompletedToday, setHasCompletedToday] = useState(false);
     const [dayIndex, setDayIndex] = useState('');
     const [revealedHints, setRevealedHints] = useState({});
+    const [globalWins, setGlobalWins] = useState(null);
 
     const yesterdayChampion = useMemo(() => {
         const yesterdayIndex = getYesterdayDayIndex();
@@ -38,6 +39,14 @@ export default function QuoteMode({ onWin }) {
             setGuesses(hydratedGuesses);
             setHasCompletedToday(savedData.won);
         }
+
+        // Fetch global clear rate
+        fetch(`/api/stats?date=${currentDayIndex}&mode=quote`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.count !== undefined) setGlobalWins(data.count);
+            })
+            .catch(err => console.error("Failed to fetch stats", err));
     }, []);
 
     const handleGuess = (char) => {
@@ -46,6 +55,14 @@ export default function QuoteMode({ onWin }) {
 
         const won = char.id === targetChar?.id;
         if (won) {
+            if (!hasCompletedToday) {
+                fetch(`/api/stats?date=${dayIndex}&mode=quote`, { method: 'POST' })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.count !== undefined) setGlobalWins(data.count);
+                    })
+                    .catch(e => console.error(e));
+            }
             setTimeout(() => {
                 setHasCompletedToday(true);
                 onWin();
@@ -69,9 +86,17 @@ export default function QuoteMode({ onWin }) {
 
     return (
         <div className="w-full max-w-[1200px] flex flex-col items-center">
-            <p className="text-gray-300 mb-6 font-medium tracking-widest uppercase text-sm md:text-base opacity-80 border-b border-elden-gold/30 pb-2">
+            <p className="text-gray-300 mb-4 font-medium tracking-widest uppercase text-sm md:text-base opacity-80 border-b border-elden-gold/30 pb-2">
                 Guess from the Quote
             </p>
+
+            {globalWins !== null && (
+                <div className="mb-6 flex items-center justify-center gap-2 bg-[#151515] border border-elden-gold/20 px-4 py-2 rounded-full shadow-md w-auto">
+                    <p className="text-xs md:text-sm font-semibold tracking-wide text-elden-gold/90">
+                        {globalWins} Tarnished found the answer today
+                    </p>
+                </div>
+            )}
 
             <div className="bg-[#1a1a1a] border-l-4 border-elden-gold p-6 md:p-10 mb-6 rounded shadow-[0_0_20px_rgba(198,162,91,0.1)] w-full max-w-2xl relative">
                 <span className="text-6xl text-elden-gold/20 absolute top-2 left-4 font-serif">"</span>

@@ -12,6 +12,7 @@ export default function SplashMode({ onWin }) {
     const [guesses, setGuesses] = useState([]);
     const [hasCompletedToday, setHasCompletedToday] = useState(false);
     const [dayIndex, setDayIndex] = useState('');
+    const [globalWins, setGlobalWins] = useState(null);
 
     const yesterdayChampion = useMemo(() => {
         const yesterdayIndex = getYesterdayDayIndex();
@@ -37,6 +38,14 @@ export default function SplashMode({ onWin }) {
             setGuesses(hydratedGuesses);
             setHasCompletedToday(savedData.won);
         }
+
+        // Fetch global clear rate
+        fetch(`/api/stats?date=${currentDayIndex}&mode=splash`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.count !== undefined) setGlobalWins(data.count);
+            })
+            .catch(err => console.error("Failed to fetch stats", err));
     }, []);
 
     const handleGuess = (char) => {
@@ -45,6 +54,14 @@ export default function SplashMode({ onWin }) {
 
         const won = char.id === targetChar?.id;
         if (won) {
+            if (!hasCompletedToday) {
+                fetch(`/api/stats?date=${dayIndex}&mode=splash`, { method: 'POST' })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.count !== undefined) setGlobalWins(data.count);
+                    })
+                    .catch(e => console.error(e));
+            }
             setTimeout(() => {
                 setHasCompletedToday(true);
                 onWin();
@@ -67,9 +84,17 @@ export default function SplashMode({ onWin }) {
 
     return (
         <div className="w-full max-w-[1200px] flex flex-col items-center">
-            <p className="text-gray-300 mb-6 font-medium tracking-widest uppercase text-sm md:text-base opacity-80 border-b border-elden-gold/30 pb-2">
+            <p className="text-gray-300 mb-4 font-medium tracking-widest uppercase text-sm md:text-base opacity-80 border-b border-elden-gold/30 pb-2">
                 Guess from the Splash Art
             </p>
+
+            {globalWins !== null && (
+                <div className="mb-6 flex items-center justify-center gap-2 bg-[#151515] border border-elden-gold/20 px-4 py-2 rounded-full shadow-md w-auto">
+                    <p className="text-xs md:text-sm font-semibold tracking-wide text-elden-gold/90">
+                        {globalWins} Tarnished found the answer today
+                    </p>
+                </div>
+            )}
 
             <div className="flex flex-col items-center mb-8 bg-[#151515] border border-white/10 p-4 rounded-2xl shadow-xl w-full max-w-lg relative">
                 <div className="w-full aspect-video rounded-xl bg-[#111] overflow-hidden relative border-2 border-elden-gold/50 shadow-inner flex flex-col justify-center items-center">

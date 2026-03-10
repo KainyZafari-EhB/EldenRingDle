@@ -6,8 +6,16 @@
     "enabled": true
   },
   "assets": {
+    "directory": "dist",
     "not_found_handling": "single-page-application"
   },
+  "main": "src/worker.js",
+  "kv_namespaces": [
+    {
+      "binding": "ELDEN_STATS",
+      "id": "197834760c42dac97b9_placeholder"
+    }
+  ],
   "compatibility_flags": [
     "nodejs_compat"
   ]

@@ -11,6 +11,7 @@ export default function ClassicMode({ onWin }) {
     const [hasCompletedToday, setHasCompletedToday] = useState(false);
     const [dayIndex, setDayIndex] = useState('');
     const [revealedHints, setRevealedHints] = useState({});
+    const [globalWins, setGlobalWins] = useState(null);
 
     const yesterdayChampion = useMemo(() => {
         const yesterdayIndex = getYesterdayDayIndex();
@@ -38,6 +39,14 @@ export default function ClassicMode({ onWin }) {
             setGuesses(hydratedGuesses);
             setHasCompletedToday(savedData.won);
         }
+
+        // Fetch global clear rate
+        fetch(`/api/stats?date=${currentDayIndex}&mode=classic`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.count !== undefined) setGlobalWins(data.count);
+            })
+            .catch(err => console.error("Failed to fetch stats", err));
     }, []);
 
     const handleGuess = (char) => {
@@ -46,6 +55,14 @@ export default function ClassicMode({ onWin }) {
 
         const won = char.id === target?.id;
         if (won) {
+            if (!hasCompletedToday) {
+                fetch(`/api/stats?date=${dayIndex}&mode=classic`, { method: 'POST' })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.count !== undefined) setGlobalWins(data.count);
+                    })
+                    .catch(e => console.error(e));
+            }
             // Delay the win screen and completion state to allow animations to finish
             // 7 categories * 500ms = 3500ms
             setTimeout(() => {
@@ -67,9 +84,17 @@ export default function ClassicMode({ onWin }) {
 
     return (
         <div className="w-full max-w-[1200px] flex flex-col items-center">
-            <p className="text-gray-300 mb-6 font-medium tracking-widest uppercase text-sm md:text-base opacity-80 border-b border-elden-gold/30 pb-2">
+            <p className="text-gray-300 mb-4 font-medium tracking-widest uppercase text-sm md:text-base opacity-80 border-b border-elden-gold/30 pb-2">
                 Guess the Character
             </p>
+
+            {globalWins !== null && (
+                <div className="mb-6 flex items-center justify-center gap-2 bg-[#151515] border border-elden-gold/20 px-4 py-2 rounded-full shadow-md w-auto">
+                    <p className="text-xs md:text-sm font-semibold tracking-wide text-elden-gold/90">
+                        {globalWins} Tarnished found the answer today
+                    </p>
+                </div>
+            )}
 
             {!hasCompletedToday ? (
                 <div className="w-full flex flex-col items-center">
