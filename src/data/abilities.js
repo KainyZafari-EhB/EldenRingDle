@@ -94,9 +94,9 @@ export const abilities = [
     { id: 43, characterId: 37, name: "Loretta's Mastery", type: "Sorcery" },
     { id: 44, characterId: 37, name: "Loretta's Slash", type: "Skill" },
 
-    // Godskin Noble (id: 38)
-    { id: 45, characterId: 38, name: "Black Flame Pillars", type: "Incantation" },
-    { id: 46, characterId: 38, name: "Belly Roll", type: "Skill" },
+    // Godskin Duo (id: 38)
+    { id: 45, characterId: 38, name: "Black Flame", type: "Incantation" },
+    { id: 46, characterId: 38, name: "Black Flame Tornado", type: "Skill" },
 
     // Fia (id: 39)
     { id: 47, characterId: 39, name: "Baldachin's Blessing", type: "Skill" },

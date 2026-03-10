@@ -444,15 +444,15 @@ export const characters = [
     },
     {
         id: 38,
-        name: "Godskin Noble",
-        gender: "Male",
+        name: "Godskin Duo",
+        gender: "Unknown",
         species: "Godskin",
-        weapon: "Rapier/Magic",
-        region: "Volcano Manor",
-        runes: 50000,
+        weapon: "Twinblade/Rapier/Magic",
+        region: "Farum Azula",
+        runes: 170000,
         affiliation: "Gloam-Eyed Queen",
         release: "Base Game",
-        image: "/images/godskinnoble.png"
+        image: "/images/godskinduo.png"
     },
     {
         id: 39,
